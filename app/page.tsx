@@ -18,6 +18,20 @@ export default function Home() {
         </Link>{" "}
         to see the demo page.
       </p>
+      <p>
+        Visit{" "}
+        <Link className="text-violet-default" href="/experience-form">
+          /experience-form
+        </Link>{" "}
+        to see the experience form.
+      </p>
+      <p>
+        Visit{" "}
+        <Link className="text-violet-default" href="/experience-overview">
+          /experience-overview
+        </Link>{" "}
+        to see the experience overview.
+      </p>
     </main>
   );
 }

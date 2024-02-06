@@ -1,21 +1,14 @@
-'use client'
 import React from "react";
 import {Form} from "@/app/experience-form/form";
-import {dehydrate, HydrationBoundary, QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {getIndustries} from "@/api/get-industries";
+import { ReactQueryProvider } from '@/providers/react-query-provider'
 
 
 const ExperienceForm = async () => {
-    const queryClient = new QueryClient()
-
-    await queryClient.prefetchQuery({
-        queryKey: ['industries'],
-        queryFn: () => getIndustries(),
-    })
+    const industries = await getIndustries()
 
   return (
-  <QueryClientProvider client={queryClient}>
-    <HydrationBoundary state={dehydrate(queryClient)}>
+  <ReactQueryProvider queries={[{key: "industries", data: industries}]}>
     <div className="p-4 xl:p-24">
       <div className="text-center">
         <h1 className="text-2xl font-bold text-center text-eminence-default">
@@ -27,8 +20,7 @@ const ExperienceForm = async () => {
         <Form/>
       </div>
     </div>
-    </HydrationBoundary>
-  </QueryClientProvider>
+  </ReactQueryProvider>
   );
 };
 

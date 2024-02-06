@@ -1,6 +1,5 @@
-'use client'
 import React from "react";
-import ExperienceBlock from '@/app/experience-overview/experience-block'
+import ExperienceBlocks from '@/app/experience-overview/experience-blocks'
 
 const ExperienceOverview = () => {
 
@@ -13,7 +12,7 @@ const ExperienceOverview = () => {
       </div>
 
       <div className="mt-24 mx-auto w-full max-w-2xl">
-        <ExperienceBlock />
+        <ExperienceBlocks />
       </div>
     </div>
   );

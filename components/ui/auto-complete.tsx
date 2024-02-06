@@ -16,6 +16,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({values, onChange, value}) =>
     const [open, setOpen] = React.useState(false)
     const [valueState, setValueState] = React.useState(value ?? "")
 
+    // Emit onChange when valueState changes
     useEffect(() => {
         onChange(valueState, values.find((option) => option.value === valueState)?.label)
     }, [valueState]);

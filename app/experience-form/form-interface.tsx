@@ -10,14 +10,13 @@ import {Textarea} from "@/components/ui/textarea";
 import { mapArrayToAutoComplete, mapIndustriesToAutoComplete } from '@/lib/utils'
 import { EMPLOYMENT_TYPES, LOCATION_TYPES, TEmployment, TLocation } from '@/app/experience-form/schema'
 import { useIndustries } from '@/hooks/use-industries'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 
 const FormInterface = () => {
-    const router = useRouter();
     const {form, onSubmit} = useFormContext()
 
-    const { data } = useIndustries()
+    const { data = [] } = useIndustries()
 
     const {
         register,
@@ -27,7 +26,7 @@ const FormInterface = () => {
 
     return (
         <FormComponent {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={onSubmit} className="space-y-8">
                 <FormField
                     control={form.control}
                     name="companyName"
@@ -135,7 +134,7 @@ const FormInterface = () => {
                             <FormLabel>Industry </FormLabel>
                             <FormControl>
                                 <AutoComplete values={mapIndustriesToAutoComplete(data)}
-                            onChange={(_, label) => setValue("industry", label)} />
+                            onChange={(_, label) => label && setValue("industry", label)} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -159,7 +158,9 @@ const FormInterface = () => {
                 />
               <div className="flex justify-between">
                 <Button type="submit">Submit</Button>
-                <Button onClick={() => router.push('/experience-overview')}>Experience overview</Button>
+                <Link className="text-violet-default" href="/experience-overview">
+                  <Button>Experience overview</Button>
+                </Link>
               </div>
             </form>
         </FormComponent>

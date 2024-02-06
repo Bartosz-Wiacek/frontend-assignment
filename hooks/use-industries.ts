@@ -7,7 +7,7 @@ export interface TIndustry {
 }
 
 export const useIndustries = () => {
-    return useQuery({
+    return useQuery<TIndustry[]>({
        queryKey: ["industries"],
         queryFn: getIndustries,
     });

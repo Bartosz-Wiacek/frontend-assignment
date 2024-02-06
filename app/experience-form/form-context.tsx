@@ -1,19 +1,20 @@
 import {useForm, UseFormReturn} from "react-hook-form";
 import {createContext, FC, PropsWithChildren, useContext} from "react";
 import {zodResolver} from "@hookform/resolvers/zod";
-import { getFormSchema, TExperience } from '@/app/experience-form/schema'
+import { schema, TExperience } from '@/app/experience-form/schema'
 
 interface FormContextValues {
     form: UseFormReturn<TExperience>;
     onSubmit: () => void;
 }
 
+//Open for extension; Single Responsibility
 const FormContext = createContext<FormContextValues | null>(null)
 
 const FormContextProvider: FC<PropsWithChildren> = ({children}) => {
 
     const form = useForm<TExperience>({
-        resolver: zodResolver(getFormSchema()),
+        resolver: zodResolver(schema),
         defaultValues: {
             companyName: "",
             positionTitle: "",
@@ -47,6 +48,7 @@ const FormContextProvider: FC<PropsWithChildren> = ({children}) => {
 }
 
 
+//Helper hook for accessing the form context
 const useFormContext = () => {
     const context = useContext(FormContext);
 
